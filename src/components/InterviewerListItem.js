@@ -1,6 +1,6 @@
 import React from "react";
 
-// import "components/DayListItem.scss";
+import "components/InterviewerListItem";
 
 
 export default function InterviewerListItem(props) {
