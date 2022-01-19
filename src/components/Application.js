@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "components/Application.scss";
 
 import DayList from "./DayList";
 
 export default function Application(props) {
+  const [day, setDay] = useState("Monday");
+
   const days = [
     {
       id: 1,
