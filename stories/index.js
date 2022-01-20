@@ -171,8 +171,8 @@ storiesOf("Appointment", module)
   .add("Header", () => <Header time="12pm" />)
   .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
   .add("Show", () => <Show onEdit={action("onEdit")} onDelete={action("onDelete")}/>)
-  .add("Confirm", () => <Confirm onConfirm={action("onConfirm")} onCancel={action("onCancel")}/>)
-  .add("Status", () => <Status />)
+  .add("Confirm", () => <Confirm message={"Delete the appointment?"} onConfirm={action("onConfirm")} onCancel={action("onCancel")}/>)
+  .add("Status", () => <Status message={"Deleting"}/>)
   // .add("Error", () => < />);
 
 
