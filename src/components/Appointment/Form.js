@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "../Button";
 
-import InterviewerList from "components/InterviewerList";
+import InterviewerList from "../InterviewerList.js";
 
 export default function Form(props) {
 
@@ -27,8 +27,8 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger {/* your code goes here */}>Cancel</Button>
-          <Button confirm {/* your code goes here */}>Save</Button>
+          <Button danger onClick={props.onCancel}>Cancel</Button>
+          <Button confirm onClick={props.onSave}>Save</Button>
         </section>
       </section>
     </main>
