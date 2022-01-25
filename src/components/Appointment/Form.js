@@ -6,8 +6,16 @@ import InterviewerList from "../InterviewerList.js";
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
-  const [interviewers, setInterviewer] = useState(props.person || null);
-  // const [interviewers, setInterviewer] = useState();
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const { interviewers } = props;
+  const reset = () => {
+    setStudent("");
+    setInterviewer(null);
+  }
+  const cancel = () => {
+    props.onCancel();
+    reset();
+  }
 
 
   return(
@@ -19,23 +27,19 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            /*
-              This must be a controlled component
-              your code goes here
-            */
             value={student}
             onChange={(event) => setStudent(event.target.value)}
           />
         </form>
         <InterviewerList 
-          // mappedInterviewers={mappedInterviewers}
-          interviewers={props.interviewers}
-          // onChange={setInterviewer}
+          interviewers={interviewers}
+          value={interviewer}
+          onChange={setInterviewer}
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={props.onCancel}>Cancel</Button>
+          <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={props.onSave}>Save</Button>
         </section>
       </section>
