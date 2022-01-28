@@ -15,22 +15,33 @@ export function getAppointmentsForDay(state, day) {
   })
   //... returns an array of appointments for that day
   return appointmentsOutput;
-}
+};
 
 export function getInterview(state, interview) {
   const interviewOutput = {};
 
   for (const data in state.interviewers) {
-    // going down one level to access id...
+
     if (interview && (state.interviewers[data].id === interview.interviewer)) {
-      // if interview data exists, and the interviewers/interviewer objects match ...
-      interviewOutput["student"] = interview.student; // pushes student name to obj
-      interviewOutput["interviewer"] = state.interviewers[data]; // pushes interviewer.id,name,avatar to obj
+      interviewOutput["student"] = interview.student;
+      interviewOutput["interviewer"] = state.interviewers[data];
       
-      // returns an obj containing student and interviewer data
       return interviewOutput
     }
   }
-  // returns null if the above fails
   return null;
+};
+
+export function getInterviewersForDay(state, day) {
+  const days = state.days;
+  const result = [];
+
+  for (let availableDay of days) {
+    if(availableDay.name === day) {
+      for (let interviewersDay of availableDay.appointments) {
+        result.push(state.appointments[interviewersDay]);
+      }
+    }
+  }
+  return result;
 }
