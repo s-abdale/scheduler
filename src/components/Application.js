@@ -18,6 +18,9 @@ export default function Application(props) {
   const setDay = day => setState({ ...state, day });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interivewers = getInterviewersForDay(state, state.day);
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  };
 
 
   useEffect(() => {
@@ -43,6 +46,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interivewers}
+        bookInterview={bookInterview}
       />
     );
   });
