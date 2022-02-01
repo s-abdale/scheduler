@@ -4,7 +4,7 @@ import "components/Application.scss";
 
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
 
 
 export default function Application(props) {
@@ -18,7 +18,9 @@ export default function Application(props) {
   });
   const setDay = day => setState({ ...state, day });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const interivewers = getInterviewersForDay(state, state.day);
 
+  // console.log(`🌄DAILY APPTS: `, dailyAppointments); // fine...
 
   useEffect(() => {
     Promise.all([
@@ -33,6 +35,16 @@ export default function Application(props) {
 
   const mappedAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    // console.log(`🍏 appointment: `, appointment);
+    // console.log(`📆 interview: `, interview); // fine...
+    
+    // const interviewersTEST = getInterviewersForDay(state, appointment.day);
+    // console.log(`interviewer test: `, interviewersTEST);
+
+    // console.log(`👩🏽‍💻 interviewer by day: `, interivewers);
+    // console.log(`----------------------------------------------------`);
+
+
     return (
       <Appointment 
         key={appointment.id} 
@@ -40,6 +52,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interivewers} //something wrong w/ interviewers count
       />
     );
   });
@@ -77,7 +90,7 @@ export default function Application(props) {
       
       <section className="schedule">
         {mappedAppointments}
-        <Appointment key="last" time="5pm" />
+        <Appointment key="last" time="5pm"/>
       </section>
     </main>
   );
