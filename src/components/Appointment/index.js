@@ -18,10 +18,7 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  // console.log(`index -> interview: `, props.interview);
-  // console.log(`index -> interviewers: `, props.interviewers);
-  // console.log(`index -> interview -> interviewer: `, props.interview.interviewer);
-  // console.log(`index -> interviewers -> name: `, props.interviewers.name);
+
 
 
   return(
@@ -33,12 +30,11 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={props.interview.interviewer.name}
         />
       )}
 
       {mode === CREATE && <Form interviewers={props.interviewers}onCancel={() => back(EMPTY)} />}
-      {/* works */}
     </article>
   );
 }

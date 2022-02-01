@@ -9,7 +9,6 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 
 export default function Application(props) {
 
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -20,7 +19,6 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interivewers = getInterviewersForDay(state, state.day);
 
-  // console.log(`🌄DAILY APPTS: `, dailyAppointments); // fine...
 
   useEffect(() => {
     Promise.all([
@@ -35,24 +33,16 @@ export default function Application(props) {
 
   const mappedAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    // console.log(`🍏 appointment: `, appointment);
-    // console.log(`📆 interview: `, interview); // fine...
-    
-    // const interviewersTEST = getInterviewersForDay(state, appointment.day);
-    // console.log(`interviewer test: `, interviewersTEST);
 
-    // console.log(`👩🏽‍💻 interviewer by day: `, interivewers);
-    // console.log(`----------------------------------------------------`);
 
 
     return (
       <Appointment 
         key={appointment.id} 
-        // {...appointment} 
         id={appointment.id}
         time={appointment.time}
         interview={interview}
-        interviewers={interivewers} //something wrong w/ interviewers count
+        interviewers={interivewers}
       />
     );
   });
