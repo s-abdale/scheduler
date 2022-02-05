@@ -42,6 +42,25 @@ export default function Application(props) {
     )
   };
 
+  function cancelInterview(id) {  // ✅ passing, but refreshes page
+    console.log(`cancelling interview`);
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return (
+      axios.delete(`http://localhost:8001/api/appointments/${id}`, {id})
+      .then(setState({
+        ...state,
+        appointments
+      }))
+    )
+  };
+
 
   useEffect(() => {
     Promise.all([
@@ -67,6 +86,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interivewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
