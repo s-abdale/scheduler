@@ -25,26 +25,27 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
 
   // spotsRemaining
-  function spotsRemaining() {
+  function spotsRemaining(appointments) {
   
-    const allDays = state.days;
-
+    // const allDays = state.days;
+    const allDays = [...state.days];
+    
     for (let day of allDays) {
-
       if (day.name === state.day) {
-
-        let bookedAppointmentCount = 0;
+        let availableSpots = 0;
+  
         for (let appointment of day.appointments) {
-          if (state.appointments[appointment].interview !== null) {
-            bookedAppointmentCount ++
+          if (appointments[appointment].interview === null) {
+            availableSpots +=1
           }
         }
-
-        day.spots = (5 - bookedAppointmentCount);
+        day.spots = availableSpots;
       } 
-    }    
+      
+    }   
+    return allDays
+    // return day.spots;
   };
-  spotsRemaining();
 
 
 
@@ -61,16 +62,26 @@ export default function useApplicationData() {
     };
 
 
-    console.log(`booking interview, updating spots remaining ...`);
-    spotsRemaining();
+    // console.log(`booking interview, updating spots remaining ...`);
+    // spotsRemaining();
 
 
     return (
       axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
-      .then(setState({
+      .then(() => {
+        // spotsRemaining(),
+        setState({
         ...state,
-        appointments
-      }))
+        appointments,
+        days: spotsRemaining(appointments)
+        // days: spotsRemaining()
+        // ...state.days
+        })
+        // spotsRemaining()
+        // console.log(`calling days`),
+        // console.log(state.days)
+      }
+      )
     )
   };
 
@@ -87,16 +98,30 @@ export default function useApplicationData() {
     };
 
 
-    console.log(`cancelling interview! updating spots remaining ...`);
-    spotsRemaining();
+    // console.log(`cancelling interview! updating spots remaining ...`);
+    // spotsRemaining();
 
 
     return (
       axios.delete(`http://localhost:8001/api/appointments/${id}`, {id})
-      .then(setState({
+      .then(() => {
+        // console.log(`calling days`),
+        // console.log(state.days),
+        // spotsRemaining(),
+        setState({
         ...state,
-        appointments
-      }))
+        appointments,
+        days: spotsRemaining(appointments)
+        // days: spotsRemaining()
+
+        })
+        // spotsRemaining()
+
+        // spotsRemaining(),
+        // console.log(`calling SECOND days`),
+        // console.log(state.days),
+      }
+      )
     )
   };
 
