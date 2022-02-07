@@ -27,7 +27,6 @@ export default function useApplicationData() {
   // spotsRemaining
   function spotsRemaining(appointments) {
   
-    // const allDays = state.days;
     const allDays = [...state.days];
     
     for (let day of allDays) {
@@ -40,14 +39,10 @@ export default function useApplicationData() {
           }
         }
         day.spots = availableSpots;
-      } 
-      
+      }
     }   
     return allDays
-    // return day.spots;
   };
-
-
 
   // bookInterview
   function bookInterview(id, interview) {
@@ -61,25 +56,14 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-
-    // console.log(`booking interview, updating spots remaining ...`);
-    // spotsRemaining();
-
-
     return (
       axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
       .then(() => {
-        // spotsRemaining(),
         setState({
         ...state,
         appointments,
         days: spotsRemaining(appointments)
-        // days: spotsRemaining()
-        // ...state.days
         })
-        // spotsRemaining()
-        // console.log(`calling days`),
-        // console.log(state.days)
       }
       )
     )
@@ -97,31 +81,15 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-
-    // console.log(`cancelling interview! updating spots remaining ...`);
-    // spotsRemaining();
-
-
     return (
       axios.delete(`http://localhost:8001/api/appointments/${id}`, {id})
       .then(() => {
-        // console.log(`calling days`),
-        // console.log(state.days),
-        // spotsRemaining(),
         setState({
         ...state,
         appointments,
         days: spotsRemaining(appointments)
-        // days: spotsRemaining()
-
         })
-        // spotsRemaining()
-
-        // spotsRemaining(),
-        // console.log(`calling SECOND days`),
-        // console.log(state.days),
-      }
-      )
+      })
     )
   };
 
@@ -131,5 +99,4 @@ export default function useApplicationData() {
     bookInterview,
     cancelInterview
   }
-
 }
