@@ -134,7 +134,7 @@ export default function Appointment(props) {
           message="Could not cancel appointment"
           onClose={()=> back()}
         />
-      } // onClose CRASHES SITE 🚨
+      }
 
     </article>
   );
