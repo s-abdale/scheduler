@@ -22,3 +22,15 @@ npm test
 npm run storybook
 ```
 ## Demo and Screenshots
+
+##### Demonstration
+Basic functions of Scheduler.
+!["Gif showing basic functions of Scheduler, including add, edit, delete appointment, and switch to different days"](https://github.com/s-abdale/scheduler/blob/master/docs/Scheduler-demo.gif)
+
+##### Appointments list
+View all appointments for the day.
+!["Screenshot of main appointments page"](https://github.com/s-abdale/scheduler/blob/master/docs/Appointment-list.png)
+
+##### Appointment form
+Add an appointment using the form.
+!["Screenshot of form to add appointments"](https://github.com/s-abdale/scheduler/blob/master/docs/Appointment-form.png)
