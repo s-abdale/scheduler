@@ -3,6 +3,7 @@
 ## Setup
 
 Install dependencies with `npm install`.
+Run Sccheduler API: https://github.com/s-abdale/scheduler-api
 
 ## Running Webpack Development Server
 
