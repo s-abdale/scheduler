@@ -5,8 +5,10 @@ import Button from "../Button";
 import InterviewerList from "../InterviewerList.js";
 
 export default function Form(props) {
+  const { interviewers, onSave, onCancel } = props;
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
 
   const reset = () => {
     setStudent("");
@@ -14,10 +16,9 @@ export default function Form(props) {
   }
   const cancel = () => {
     reset();
-    props.onCancel();
+    onCancel();
   }
 
-  const [error, setError] = useState("");
 
   function validate() {
     if (student === "")  {
@@ -29,8 +30,8 @@ export default function Form(props) {
       return;
     }
     setError("");
-    props.onSave(student, interviewer);
-  }
+    onSave(student, interviewer);
+  };
 
 
   return(
@@ -47,12 +48,12 @@ export default function Form(props) {
             data-testid="student-name-input"
           />
           <section className="appointment__validation">{error}</section>
+          <InterviewerList 
+            interviewers={interviewers}
+            value={interviewer}
+            onChange={setInterviewer}
+          />
         </form>
-        <InterviewerList 
-          interviewers={props.interviewers}
-          value={interviewer}
-          onChange={setInterviewer}
-        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
